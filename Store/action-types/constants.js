@@ -1,0 +1,1 @@
+export const SET_INTERVAL = "SET_INTERVAL"

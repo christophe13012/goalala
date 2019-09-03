@@ -1,6 +1,6 @@
-import { SET_INTERVAL } from '../action-types/constants';
+import { SET_INTERVAL } from "../action-types/constants";
 
-const initialState = { interval: 15 };
+const initialState = { interval: 30 };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {

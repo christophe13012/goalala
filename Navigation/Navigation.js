@@ -21,9 +21,6 @@ const HomeStackNavigator = createStackNavigator({
   Home: {
     screen: Home,
     navigationOptions: {
-      // title: 'Goalala',
-      // header : <Text>test</Text>,
-      // headerTintColor: "white",
       headerStyle: {
         backgroundColor: "#311b92"
       },

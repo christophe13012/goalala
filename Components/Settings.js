@@ -28,7 +28,7 @@ class Settings extends React.Component {
         <Text style={styles.paragraph}>
           Intervalle de mise à jour des scores :
         </Text>
-        {[5, 15, 35, 60].map(el => {
+        {[30, 60, 90].map(el => {
           return (
             <TouchableOpacity
               onPress={() => this.onPress(el)}

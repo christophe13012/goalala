@@ -1,1 +1,2 @@
-export const SET_INTERVAL = "SET_INTERVAL"
+export const SET_INTERVAL = "SET_INTERVAL";
+export const SET_MATCH_ID_FAVORI = "SET_MATCH_ID_FAVORI";

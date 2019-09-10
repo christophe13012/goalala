@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Text, View, StyleSheet, Image } from "react-native";
+import { Text, View, StyleSheet, Image, Span } from "react-native";
 import { getDetailMatch } from "../API/index";
 
 export default class MatchDetail extends React.Component {
@@ -9,6 +9,40 @@ export default class MatchDetail extends React.Component {
       this.props.navigation.state.params.match.id
     );
     this.setState({ event: data.data.event });
+  }
+  renderImage(event) {
+    switch (event) {
+      case "YELLOW_CARD":
+        return (
+          <Image
+            style={styles.image}
+            source={require("../Images/yellow-card.png")}
+          />
+        );
+      case "RED_CARD":
+        return (
+          <Image
+            style={styles.image}
+            source={require("../Images/red-card.png")}
+          />
+        );
+      case "GOAL":
+        return (
+          <Image
+            style={styles.image}
+            source={require("../Images/soccerball.png")}
+          />
+        );
+      case "GOAL_PENALTY":
+        return (
+          <Image
+            style={styles.image}
+            source={require("../Images/penalty.png")}
+          />
+        );
+      default:
+        break;
+    }
   }
   render() {
     const { match } = this.props.navigation.state.params;
@@ -27,18 +61,23 @@ export default class MatchDetail extends React.Component {
           {this.state.event.map(event => {
             return event.home_away === "h" ? (
               <View style={styles.eventHome} key={event.id}>
-                <Text style={styles.minutes}>{event.time}</Text>
+                <Text style={styles.minutes}>
+                  {isNaN(event.time) ? event.time + "'" : event.time}
+                </Text>
                 <Text style={styles.textEvent}>
-                  {event.event + " " + event.player}
+                  {this.renderImage(event.event)}
+                  {event.player}
                 </Text>
                 <Text style={styles.null}></Text>
               </View>
             ) : (
               <View style={styles.eventAway} key={event.id}>
-                <Text style={styles.minutes}>{event.time}</Text>
+                <Text style={styles.minutes}>
+                  {isNaN(event.time) ? event.time + "'" : event.time}
+                </Text>
                 <Text style={styles.null}></Text>
                 <Text style={styles.textEvent}>
-                  {event.event + " " + event.player}
+                  {this.renderImage(event.event)} {event.player}
                 </Text>
               </View>
             );
@@ -54,6 +93,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     margin: 10,
+    marginTop: 20,
     borderTopRightRadius: 5,
     borderTopLeftRadius: 5
   },
@@ -115,5 +155,10 @@ const styles = StyleSheet.create({
   },
   null: {
     width: "45%"
-  }
+  },
+  image: {
+    width: 20,
+    height: 20
+  },
+  player: {}
 });

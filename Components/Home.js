@@ -2,15 +2,16 @@ import * as React from "react";
 import { View, StyleSheet, StatusBar, ScrollView, Text } from "react-native";
 import _ from "lodash";
 import { getMatches, competitions } from "../API/index";
-import Match from "./Match";
+import Competition from "./Competition";
 
 export default class Home extends React.Component {
   state = { matches: [] };
-  competitionId = -1;
   async componentDidMount() {
     try {
       const { data } = await getMatches();
-      this.setState({ matches: data.data.match });
+      const groupByCompet = this.groupBy("competition_name");
+      const matches = groupByCompet(data.data.match);
+      this.setState({ matches });
       //this.interval();
     } catch (error) {
       console.log("error :" + error);
@@ -19,7 +20,6 @@ export default class Home extends React.Component {
   interval = () => {
     setInterval(async () => {
       try {
-        console.log("test");
         const { data } = await getMatches();
         this.setState({ matches: data.data.match });
       } catch (error) {
@@ -27,24 +27,16 @@ export default class Home extends React.Component {
       }
     }, 5000);
   };
-  changerCompetition = (id, competition) => {
-    if (this.competitionId != id) {
-      this.competitionId = id;
-      return (
-        <View style={styles.titre}>
-          <Text>{competition}</Text>
-        </View>
-      );
-    }
-    return null;
-  };
+  groupBy = key => array =>
+    array.reduce((objectsByKeyValue, obj) => {
+      const value = obj[key];
+      objectsByKeyValue[value] = (objectsByKeyValue[value] || []).concat(obj);
+      return objectsByKeyValue;
+    }, {});
   render() {
-    //  const matchlist = this.state.matches.filter(match =>
-    //   competitions.includes(match.competition_id + "")
-    // );
     const matchListOrdered = _.orderBy(
       this.state.matches,
-      ["competition_id"],
+      ["competition_name"],
       "asc"
     );
     return (
@@ -52,12 +44,10 @@ export default class Home extends React.Component {
         <StatusBar barStyle="light-content" />
         <ScrollView style={styles.matchList}>
           {matchListOrdered.map((el, index) => (
-            <Match
+            <Competition
+              key={index}
+              competition={el}
               navigation={this.props.navigation}
-              key={el.id}
-              match={el}
-              matchApres={matchListOrdered[index + 1] && true}
-              changerCompetition={this.changerCompetition}
             />
           ))}
         </ScrollView>

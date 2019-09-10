@@ -39,10 +39,14 @@ export default class Home extends React.Component {
     return null;
   };
   render() {
-    const matchlist = this.state.matches.filter(match =>
-      competitions.includes(match.competition_id + "")
+    //  const matchlist = this.state.matches.filter(match =>
+    //   competitions.includes(match.competition_id + "")
+    // );
+    const matchListOrdered = _.orderBy(
+      this.state.matches,
+      ["competition_id"],
+      "asc"
     );
-    const matchListOrdered = _.orderBy(matchlist, ["competition_id"], "asc");
     return (
       <View style={styles.container}>
         <StatusBar barStyle="light-content" />

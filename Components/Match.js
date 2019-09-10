@@ -4,9 +4,9 @@ import { Logs } from "expo";
 
 class Match extends Component {
   state = {};
-  displayDetailMatch = idMatch => {
-    console.log(idMatch);
-    this.props.navigation.navigate("MatchDetail", { idMatch: idMatch });
+  displayDetailMatch = match => {
+    console.log(match.id);
+    this.props.navigation.navigate("MatchDetail", { match: match });
   };
   render() {
     const { match } = this.props;
@@ -29,7 +29,7 @@ class Match extends Component {
           </View>
           <TouchableOpacity
             style={styles.match}
-            onPress={() => this.displayDetailMatch(match.id)}
+            onPress={() => this.displayDetailMatch(match)}
           >
             <Text style={styles.text}>{match.home_name}</Text>
             <Text style={styles.text}>{match.away_name}</Text>

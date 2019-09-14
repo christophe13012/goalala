@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { View, StyleSheet, StatusBar, Image, Text } from "react-native";
 import Match from "./Match";
+import { competitionliste } from "../API/index";
 
 class Competition extends Component {
   state = {};
@@ -9,29 +10,13 @@ class Competition extends Component {
     return arr[8] + arr[9] + "/" + arr[5] + arr[6] + "/" + arr[2] + arr[3];
   }
   renderPays(id) {
-    const { competList } = this.props;
-    const compet = competList.find(compet => compet.id == id);
-    const pays =
-      compet.countries.length > 0
-        ? compet.countries[0].name.toLowerCase()
-        : compet.federations[0].name;
-
-    const sourcePays = "../Images/flags/" + "italy" + ".png";
-    return (
-      <Image
-        source={{
-          uri:
-            "http://www.senojflags.com/images/national-flags/" +
-            pays +
-            "-Flag.gif"
-        }}
-        style={styles.icon}
-      />
+    const competIndex = competitionliste.findIndex(
+      compet => compet.idcompet == id
     );
+    const urlFlag = competitionliste[competIndex].urlFlag;
+    return <Image source={urlFlag} style={styles.icon} />;
   }
   render() {
-    // console.log(this.props.competList);
-
     return (
       <View style={styles.main}>
         <View style={styles.titre}>

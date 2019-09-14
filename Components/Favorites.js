@@ -11,13 +11,11 @@ const mapStateToProps = state => {
 };
 
 class Favorites extends Home {
-  state = { matches: [], competition: [] };
+  state = { matches: [] };
   async componentDidMount() {
     try {
-      const response = await getCompetition();
-      const competition = response.data.data.competition;
       const { data } = await getMatches();
-      this.setState({ matches: data.data.match, competition });
+      this.setState({ matches: data.data.match });
       //this.interval();
     } catch (error) {
       console.log("error :" + error);
@@ -39,7 +37,6 @@ class Favorites extends Home {
             <Competition
               key={index}
               competition={el}
-              competList={this.state.competition}
               navigation={this.props.navigation}
             />
           ))}

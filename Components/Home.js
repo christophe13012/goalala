@@ -5,15 +5,13 @@ import { getMatches, getCompetition } from "../API/index";
 import Competition from "./Competition";
 
 export default class Home extends React.Component {
-  state = { matches: [], competition: [] };
+  state = { matches: [] };
   async componentDidMount() {
     try {
-      const response = await getCompetition();
-      const competition = response.data.data.competition;
       const { data } = await getMatches();
       const groupByCompet = this.groupBy("competition_name");
       const matches = groupByCompet(data.data.match);
-      this.setState({ matches, competition });
+      this.setState({ matches });
       //this.interval();
     } catch (error) {
       console.log("error :" + error);
@@ -49,7 +47,6 @@ export default class Home extends React.Component {
             <Competition
               key={index}
               competition={el}
-              competList={this.state.competition}
               navigation={this.props.navigation}
             />
           ))}

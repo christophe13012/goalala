@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { setInterval } from "../Store/Actions/index";
+import SelectionCompetition from "./SelectionCompetition";
 
 const mapStateToProps = state => {
   return { interval: state.interval };
@@ -25,32 +26,34 @@ class Settings extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.paragraph}>
-          Intervalle de mise à jour des scores :
-        </Text>
-        {[30, 60, 90].map(el => {
-          return (
-            <TouchableOpacity
-              onPress={() => this.onPress(el)}
-              key={el}
-              style={
-                this.props.interval === el
-                  ? styles.buttonSelected
-                  : styles.button
-              }
-            >
-              <Text
+        <Text style={styles.titre}>Intervalle de mise à jour des scores :</Text>
+        <View style={styles.choix}>
+          {[30, 60, 90].map(el => {
+            return (
+              <TouchableOpacity
+                onPress={() => this.onPress(el)}
+                key={el}
                 style={
                   this.props.interval === el
-                    ? styles.textButtonSelected
-                    : styles.textButton
+                    ? styles.buttonSelected
+                    : styles.button
                 }
               >
-                {el} secondes
-              </Text>
-            </TouchableOpacity>
-          );
-        })}
+                <Text
+                  style={
+                    this.props.interval === el
+                      ? styles.textButtonSelected
+                      : styles.textButton
+                  }
+                >
+                  {el} secondes
+                </Text>
+              </TouchableOpacity>
+            );
+          })}
+        </View>
+
+        <SelectionCompetition />
       </View>
     );
   }
@@ -58,40 +61,45 @@ class Settings extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 24
+    padding: 24,
+    flex: 1
   },
-  paragraph: {
-    margin: 24,
+  choix: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-around"
+  },
+  titre: {
+    marginBottom: 20,
     marginTop: 0,
-    fontSize: 20,
-    textAlign: "center"
+    fontSize: 20
   },
   button: {
-    padding: 10,
-    width: 200,
+    height: 30,
+    width: "30%",
     borderColor: "#311b92",
     borderWidth: 2,
     borderRadius: 5,
-    marginBottom: 15
+    marginBottom: 15,
+    justifyContent: "center"
   },
   buttonSelected: {
-    width: 200,
-    padding: 10,
+    height: 30,
+    width: "30%",
     borderColor: "#311b92",
     borderWidth: 2,
     backgroundColor: "#311b92",
     borderRadius: 5,
-    marginBottom: 15
+    marginBottom: 15,
+    justifyContent: "center"
   },
   textButton: {
-    fontSize: 20,
+    fontSize: 14,
     color: "#311b92",
     textAlign: "center"
   },
   textButtonSelected: {
-    fontSize: 20,
+    fontSize: 14,
     color: "white",
     textAlign: "center"
   }

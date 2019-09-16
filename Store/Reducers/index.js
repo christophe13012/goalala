@@ -1,7 +1,7 @@
-import { SET_INTERVAL } from "../action-types/constants";
+import { SET_INTERVAL, TOGGLE_COMPETITIONS } from "../action-types/constants";
 import { SET_MATCH_ID_FAVORI } from "../action-types/constants";
 
-const initialState = { interval: 30, matchIdFavori: [] };
+const initialState = { interval: 30, matchIdFavori: [], competitions: [] };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -15,6 +15,16 @@ const rootReducer = (state = initialState, action) => {
         matchIdFavori.push(action.payload);
       }
       return { ...state, matchIdFavori };
+    case TOGGLE_COMPETITIONS:
+      let competitions = [...state.competitions];
+      if (competitions.includes(action.payload[0])) {
+        competitions = competitions.filter(
+          compet => !action.payload.includes(compet)
+        );
+      } else {
+        competitions = [...competitions, ...action.payload];
+      }
+      return { ...state, competitions };
     default:
       return state;
   }

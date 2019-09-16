@@ -61,7 +61,7 @@ class Settings extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 24,
+    padding: 10,
     flex: 1
   },
   choix: {
@@ -70,8 +70,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-around"
   },
   titre: {
-    marginBottom: 20,
-    marginTop: 0,
+    marginBottom: 15,
+    marginTop: 10,
     fontSize: 20
   },
   button: {
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     borderColor: "#311b92",
     borderWidth: 2,
     borderRadius: 5,
-    marginBottom: 15,
+    marginBottom: 10,
     justifyContent: "center"
   },
   buttonSelected: {

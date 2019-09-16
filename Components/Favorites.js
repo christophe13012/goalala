@@ -1,4 +1,3 @@
-import Home from "./Home";
 import { connect } from "react-redux";
 import * as React from "react";
 import { View, StyleSheet, StatusBar, ScrollView, Text } from "react-native";
@@ -7,10 +6,12 @@ import { getMatches, getCompetition } from "../API/index";
 import Competition from "./Competition";
 
 const mapStateToProps = state => {
-  return { matchIdFavori: state.matchIdFavori };
+  return {
+    matchIdFavori: state.matchIdFavori
+  };
 };
 
-class Favorites extends Home {
+class Favorites extends React.Component {
   state = { matches: [] };
   async componentDidMount() {
     try {
@@ -21,12 +22,28 @@ class Favorites extends Home {
       console.log("error :" + error);
     }
   }
+  interval = () => {
+    setInterval(async () => {
+      try {
+        const { data } = await getMatches();
+        this.setState({ matches: data.data.match });
+      } catch (error) {
+        console.log("error :" + error);
+      }
+    }, 5000);
+  };
+  leaveAccueil() {
+    setTimeout(() => {
+      this.setState({ ecranAccueil: false });
+    }, 3000);
+  }
   render() {
     const filtered = this.state.matches.filter(match =>
       this.props.matchIdFavori.includes(match.id)
     );
-    const groupByCompet = this.groupBy("competition_name");
-    const matches = groupByCompet(filtered);
+    //   const groupByCompet = this.groupBy("competition_name");
+    //  const matches = groupByCompet(filtered);
+    const matches = _.groupBy(filtered, match => match.competition_id);
     const matchListOrdered = _.orderBy(matches, ["competition_name"], "asc");
 
     return (

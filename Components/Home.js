@@ -1,16 +1,31 @@
 import * as React from "react";
-import { View, StyleSheet, StatusBar, ScrollView, Text } from "react-native";
+import {
+  View,
+  StyleSheet,
+  StatusBar,
+  ScrollView,
+  ActivityIndicator,
+  Text
+} from "react-native";
+import { connect } from "react-redux";
 import _ from "lodash";
 import { getMatches, getCompetition } from "../API/index";
 import Competition from "./Competition";
+import Accueil from "./Accueil";
 
-export default class Home extends React.Component {
-  state = { matches: [] };
+const mapStateToProps = state => {
+  return {
+    competitions: state.competitions
+  };
+};
+
+class Home extends React.Component {
+  state = { matches: [], ecranAccueil: true };
   async componentDidMount() {
     try {
+      this.leaveAccueil();
       const { data } = await getMatches();
-      const groupByCompet = this.groupBy("competition_name");
-      const matches = groupByCompet(data.data.match);
+      const matches = _.groupBy(data.data.match, match => match.competition_id);
       this.setState({ matches });
       //this.interval();
     } catch (error) {
@@ -27,19 +42,28 @@ export default class Home extends React.Component {
       }
     }, 5000);
   };
-  groupBy = key => array =>
-    array.reduce((objectsByKeyValue, obj) => {
-      const value = obj[key];
-      objectsByKeyValue[value] = (objectsByKeyValue[value] || []).concat(obj);
-      return objectsByKeyValue;
-    }, {});
+  leaveAccueil() {
+    setTimeout(() => {
+      this.setState({ ecranAccueil: false });
+    }, 3000);
+  }
   render() {
     const matchListOrdered = _.orderBy(
       this.state.matches,
       ["competition_name"],
       "asc"
     );
-    return (
+    //  console.log(this.props.competitions);
+    const filtered = matchListOrdered.filter(match => {
+      console.log(match[0].competition_id);
+
+      this.props.competitions.includes(match.competition_id);
+    });
+    //   console.log(matchListOrdered[0], this.props.competitions);
+
+    return this.state.ecranAccueil || this.state.matches.length === 0 ? (
+      <Accueil />
+    ) : (
       <View style={styles.container}>
         <StatusBar barStyle="light-content" />
         <ScrollView style={styles.matchList}>
@@ -71,3 +95,5 @@ const styles = StyleSheet.create({
     marginTop: 8
   }
 });
+
+export default connect(mapStateToProps)(Home);

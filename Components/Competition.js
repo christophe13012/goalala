@@ -26,9 +26,9 @@ class Competition extends Component {
           <Text style={styles.titreText}>
             {this.props.competition[0].competition_name}
           </Text>
-          <Text style={styles.pays}>
+          <View style={styles.pays}>
             {this.renderPays(this.props.competition[0].competition_id)}
-          </Text>
+          </View>
         </View>
         {this.props.competition.map((match, index) => (
           <Match
@@ -64,11 +64,13 @@ const styles = StyleSheet.create({
     paddingLeft: 10
   },
   pays: {
-    flex: 1
+    flex: 1,
+    alignItems: "flex-end"
   },
   icon: {
-    width: 15,
-    height: 15
+    width: 20,
+    height: 20,
+    marginRight: 10
   }
 });
 

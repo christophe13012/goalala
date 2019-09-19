@@ -3,8 +3,10 @@ import { StyleSheet, Image, Text, View } from "react-native";
 import {
   createStackNavigator,
   createAppContainer,
-  createBottomTabNavigator
+  createBottomTabNavigator,
+  createSwitchNavigator
 } from "react-navigation";
+import Splash from "../Components/Splash";
 import Home from "../Components/Home";
 import MatchDetail from "../Components/MatchDetail";
 import Settings from "../Components/Settings";
@@ -123,6 +125,11 @@ const LiveScoreTabNavigator = createBottomTabNavigator(
   }
 );
 
+const InitialNavigator = createSwitchNavigator({
+  Splash: Splash,
+  App: LiveScoreTabNavigator
+});
+
 const styles = StyleSheet.create({
   icon: {
     width: 20,
@@ -146,4 +153,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default createAppContainer(LiveScoreTabNavigator);
+export default createAppContainer(InitialNavigator);

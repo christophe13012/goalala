@@ -20,6 +20,10 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
+const mapStateToProps = state => {
+  return { competitions: state.competitions };
+};
+
 class selectionCompetition extends Component {
   handleSelectCompet = pays => {
     const competitions = [];
@@ -28,12 +32,26 @@ class selectionCompetition extends Component {
     });
     this.props.toggleCompetitions(competitions);
   };
+  renderImage = pays => {
+    const { idcompet } = competitionliste.find(compet => compet.pays === pays);
+    return (
+      <Image
+        style={styles.icon}
+        source={
+          this.props.competitions.includes(idcompet)
+            ? require("../Images/minus.png")
+            : require("../Images/plus.png")
+        }
+      ></Image>
+    );
+  };
   render() {
     const pays = _.orderBy(competitionliste, ["pays"], "asc");
-    // const grouped = _.groupBy(pays, pay => pay.pays);
     return (
       <View style={styles.container}>
-        <Text style={styles.titre}>Selection des pays :</Text>
+        <Text style={styles.titre}>
+          Selection des compétitions par pays et fédération :
+        </Text>
         <ScrollView>
           {pays.map(
             (compet, index) =>
@@ -45,10 +63,7 @@ class selectionCompetition extends Component {
                     style={styles.sign}
                     onPress={() => this.handleSelectCompet(compet.pays)}
                   >
-                    <Image
-                      style={styles.icon}
-                      source={require("../Images/plus.png")}
-                    ></Image>
+                    {this.renderImage(compet.pays)}
                   </TouchableOpacity>
                 </View>
               ))
@@ -90,6 +105,6 @@ const styles = StyleSheet.create({
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(selectionCompetition);

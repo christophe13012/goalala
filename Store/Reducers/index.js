@@ -1,10 +1,18 @@
 import { SET_INTERVAL, TOGGLE_COMPETITIONS } from "../action-types/constants";
 import { SET_MATCH_ID_FAVORI } from "../action-types/constants";
+import { MATCHES_API } from "../action-types/constants";
 
-const initialState = { interval: 30, matchIdFavori: [], competitions: [] };
+const initialState = {
+  interval: 30,
+  matchesAPI: [],
+  matchIdFavori: [],
+  competitions: ["244", "245"]
+};
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
+    case MATCHES_API:
+      return { ...state, matchesAPI: action.payload };
     case SET_INTERVAL:
       return { ...state, interval: action.payload };
     case SET_MATCH_ID_FAVORI:

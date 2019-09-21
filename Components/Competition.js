@@ -37,6 +37,7 @@ class Competition extends Component {
             index={index}
             length={this.props.competition.length}
             navigation={this.props.navigation}
+            recents={this.props.recents}
           />
         ))}
       </View>

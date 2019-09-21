@@ -1,5 +1,9 @@
 import axios from "axios";
 
+const hier = new Date(new Date().setDate(new Date().getDate() - 1));
+const hierISO = hier.toISOString().substring(0, 10);
+console.log(hierISO);
+
 export function getMatches() {
   return axios.get(
     "http://livescore-api.com/api-client/scores/live.json?key=g76o4OSIJMbcxvgB&secret=z1SM6JIsm48GZvRgDXFILxqvkBHR6YtG"
@@ -9,6 +13,13 @@ export function getMatches() {
 export function getCompetition() {
   return axios.get(
     "https://livescore-api.com/api-client/competitions/list.json?key=g76o4OSIJMbcxvgB&secret=z1SM6JIsm48GZvRgDXFILxqvkBHR6YtG"
+  );
+}
+
+export function getRecents() {
+  return axios.get(
+    "https://livescore-api.com/api-client/scores/history.json?key=g76o4OSIJMbcxvgB&secret=z1SM6JIsm48GZvRgDXFILxqvkBHR6YtG&from=" +
+      hierISO
   );
 }
 

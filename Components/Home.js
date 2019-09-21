@@ -5,7 +5,7 @@ import _ from "lodash";
 import Livescore from "./Livescore";
 
 const Home = ({ navigation }) => {
-  return <Livescore favorites={false} navigation={navigation} />;
+  return <Livescore navigation={navigation} />;
 };
 
 export default Home;

@@ -4,13 +4,16 @@ import {
   createStackNavigator,
   createAppContainer,
   createBottomTabNavigator,
-  createSwitchNavigator
+  createSwitchNavigator,
+  createMaterialTopTabNavigator
 } from "react-navigation";
 import Splash from "../Components/Splash";
 import Home from "../Components/Home";
 import MatchDetail from "../Components/MatchDetail";
 import Settings from "../Components/Settings";
 import Favorites from "../Components/Favorites";
+import Live from "../Components/Live";
+import Recents from "../Components/Recents";
 
 const CustomHeader = ({ title, subtitle }) => (
   <View style={styles.header}>
@@ -19,9 +22,53 @@ const CustomHeader = ({ title, subtitle }) => (
   </View>
 );
 
+const TabNav = createMaterialTopTabNavigator(
+  {
+    Tab1: {
+      screen: Recents,
+      navigationOptions: {
+        title: "Récents",
+        tabBarOptions: {
+          upperCaseLabel: false,
+          style: {
+            backgroundColor: "#1565c0"
+          }
+        }
+      }
+    },
+    Tab2: {
+      screen: Home,
+      navigationOptions: {
+        title: "Aujourd'hui",
+        tabBarOptions: {
+          upperCaseLabel: false,
+          style: {
+            backgroundColor: "#1565c0"
+          }
+        }
+      }
+    },
+    Tab3: {
+      screen: Live,
+      navigationOptions: {
+        title: "En cours",
+        tabBarOptions: {
+          upperCaseLabel: false,
+          style: {
+            backgroundColor: "#1565c0"
+          }
+        }
+      }
+    }
+  },
+  {
+    initialRouteName: "Tab2"
+  }
+);
+
 const HomeStackNavigator = createStackNavigator({
   Home: {
-    screen: Home,
+    screen: TabNav,
     navigationOptions: {
       headerStyle: {
         backgroundColor: "#311b92"

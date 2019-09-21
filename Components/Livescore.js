@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import _ from "lodash";
-import { getMatches, getCompetition } from "../API/index";
+import { getMatches, getCompetition, getRecents } from "../API/index";
 import Competition from "./Competition";
 import { saveMatchesAPI } from "../Store/Actions/index";
 
@@ -30,7 +30,7 @@ class Livescore extends React.Component {
   state = { matches: this.props.matchesAPI, apiEnd: false };
   async componentDidMount() {
     try {
-      const { data } = await getMatches();
+      const { data } = await (this.props.recents ? getRecents() : getMatches());
       this.props.saveMatchesAPI(data.data.match);
       this.setState({ matches: data.data.match, apiEnd: true });
       //this.interval();
@@ -49,7 +49,7 @@ class Livescore extends React.Component {
     }, this.props.interval * 1000);
   };
   render() {
-    const filtered = this.props.favorites
+    let filtered = this.props.favorites
       ? this.state.matches.filter(match => {
           return (
             this.props.matchIdFavori.includes(match.id) &&
@@ -59,6 +59,10 @@ class Livescore extends React.Component {
       : this.state.matches.filter(match => {
           return this.props.competitions.includes(match.competition_id);
         });
+
+    if (this.props.live) {
+      filtered = filtered.filter(match => match.status === "IN PLAY");
+    }
 
     const matches = _.groupBy(filtered, match => match.competition_id);
     const matchListOrdered = _.orderBy(matches, ["competition_name"], "asc");
@@ -77,6 +81,7 @@ class Livescore extends React.Component {
             <Competition
               key={index}
               competition={el}
+              recents={this.props.recents}
               navigation={this.props.navigation}
             />
           ))}

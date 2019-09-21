@@ -6,7 +6,7 @@ const initialState = {
   interval: 30,
   matchesAPI: [],
   matchIdFavori: [],
-  competitions: ["244", "245"]
+  competitions: ["244", "245", "2", "3", "5", "8", "285", "230", "158"]
 };
 
 const rootReducer = (state = initialState, action) => {

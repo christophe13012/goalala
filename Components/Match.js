@@ -19,6 +19,13 @@ class Match extends Component {
   fav = matchId => {
     this.props.setmatchIdFavori(matchId);
   };
+  renderImage(id) {
+    if (this.props.recents) return require("../Images/broken-heart.png");
+
+    return this.props.matchIdFavori.includes(id)
+      ? require("../Images/like.png")
+      : require("../Images/unlike.png");
+  }
   render() {
     const { match } = this.props;
     return (
@@ -49,14 +56,7 @@ class Match extends Component {
           style={styles.favori}
           onPress={() => this.fav(match.id)}
         >
-          <Image
-            style={styles.image}
-            source={
-              this.props.matchIdFavori.includes(match.id)
-                ? require("../Images/like.png")
-                : require("../Images/unlike.png")
-            }
-          />
+          <Image style={styles.image} source={this.renderImage(match.id)} />
         </TouchableOpacity>
       </View>
     );

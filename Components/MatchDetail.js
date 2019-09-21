@@ -8,6 +8,7 @@ export default class MatchDetail extends React.Component {
     const { data } = await getDetailMatch(
       this.props.navigation.state.params.match.id
     );
+    console.log("fini");
     this.setState({ event: data.data.event });
   }
   renderImage(event) {
@@ -57,32 +58,39 @@ export default class MatchDetail extends React.Component {
           <Text style={styles.score}>{match.score}</Text>
           <Text style={styles.away_name}>{match.away_name}</Text>
         </View>
-        <View style={styles.event}>
-          {this.state.event.map(event => {
-            return event.home_away === "h" ? (
-              <View style={styles.eventHome} key={event.id}>
-                <Text style={styles.minutes}>
+        {this.state.event.map(event => {
+          return event.home_away === "h" ? (
+            <View style={styles.eventView} key={event.id}>
+              <View style={styles.minutes}>
+                <Text style={styles.textMinutes}>
                   {isNaN(event.time) ? event.time + "'" : event.time}
                 </Text>
-                <Text style={styles.textEvent}>
-                  {this.renderImage(event.event)}
-                  {event.player}
-                </Text>
-                <Text style={styles.null}></Text>
               </View>
-            ) : (
-              <View style={styles.eventAway} key={event.id}>
-                <Text style={styles.minutes}>
+              <View style={styles.imageAction}>
+                {this.renderImage(event.event)}
+              </View>
+              <View style={styles.player}>
+                <Text style={styles.text}>{event.player}</Text>
+              </View>
+              <View style={styles.null}></View>
+            </View>
+          ) : (
+            <View style={styles.eventView} key={event.id}>
+              <View style={styles.minutes}>
+                <Text style={styles.textMinutes}>
                   {isNaN(event.time) ? event.time + "'" : event.time}
                 </Text>
-                <Text style={styles.null}></Text>
-                <Text style={styles.textEvent}>
-                  {this.renderImage(event.event)} {event.player}
-                </Text>
               </View>
-            );
-          })}
-        </View>
+              <View style={styles.null}></View>
+              <View style={styles.imageAction}>
+                {this.renderImage(event.event)}
+              </View>
+              <View style={styles.player}>
+                <Text style={styles.text}>{event.player}</Text>
+              </View>
+            </View>
+          );
+        })}
       </View>
     );
   }
@@ -118,7 +126,12 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: "white"
   },
-  minutes: { width: "10%", textAlign: "center", color: "white" },
+  minutes: {
+    width: "10%",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  textMinutes: { fontSize: 14, color: "white" },
   home_name: {
     width: "40%",
     textAlign: "center",
@@ -131,34 +144,34 @@ const styles = StyleSheet.create({
   away_name: {
     width: "40%",
     textAlign: "center",
-    color: "white"
-  },
-  event: {
-    backgroundColor: "#311b92",
-    width: "100%",
-    paddingTop: 10,
-    paddingBottom: 10,
-    borderBottomLeftRadius: 5,
-    borderBottomRightRadius: 5
-  },
-  eventHome: {
-    flexDirection: "row"
-  },
-  eventAway: {
-    flexDirection: "row"
-  },
-  textEvent: {
     color: "white",
-    width: "45%",
-    fontSize: 10,
-    textAlign: "center"
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  eventView: {
+    flexDirection: "row",
+    backgroundColor: "#311b92",
+    height: 30,
+    alignItems: "center",
+    justifyContent: "center",
+    borderBottomWidth: 1,
+    borderBottomColor: "white"
+  },
+  imageAction: {
+    width: "10%"
+  },
+  text: {
+    color: "white",
+    fontSize: 12
   },
   null: {
-    width: "45%"
+    width: "40%"
   },
   image: {
     width: 20,
     height: 20
   },
-  player: {}
+  player: {
+    width: "40%"
+  }
 });

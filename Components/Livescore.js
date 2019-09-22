@@ -12,6 +12,7 @@ import _ from "lodash";
 import { getMatches, getCompetition, getRecents } from "../API/index";
 import Competition from "./Competition";
 import { saveMatchesAPI } from "../Store/Actions/index";
+import { BottomTabBar } from "react-navigation";
 
 const mapStateToProps = state => {
   return {
@@ -38,6 +39,13 @@ class Livescore extends React.Component {
       console.log("error :" + error);
     }
   }
+  addcontent = async () => {
+    if (this.props.recents) {
+      const { data } = await getMatches();
+      const matches = [...this.state.matches, ...data.data.match];
+      this.setState({ matches });
+    }
+  };
   interval = () => {
     setInterval(async () => {
       try {
@@ -65,6 +73,7 @@ class Livescore extends React.Component {
     }
 
     const matches = _.groupBy(filtered, match => match.competition_id);
+
     const matchListOrdered = _.orderBy(matches, ["competition_name"], "asc");
     return !this.state.apiEnd ? (
       <View style={styles.activity}>
@@ -76,7 +85,19 @@ class Livescore extends React.Component {
     ) : (
       <View style={styles.container}>
         <StatusBar barStyle="light-content" />
-        <ScrollView style={styles.matchList}>
+        <ScrollView
+          style={styles.matchList}
+          onScroll={e => {
+            let paddingToBottom = 10;
+            paddingToBottom += e.nativeEvent.layoutMeasurement.height;
+            if (
+              e.nativeEvent.contentOffset.y >=
+              e.nativeEvent.contentSize.height - paddingToBottom
+            ) {
+              this.addcontent();
+            }
+          }}
+        >
           {matchListOrdered.map((el, index) => (
             <Competition
               key={index}

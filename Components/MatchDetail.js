@@ -41,6 +41,8 @@ export default class MatchDetail extends React.Component {
             source={require("../Images/penalty.png")}
           />
         );
+      case "OWN_GOAL":
+        return <Text>OG</Text>;
       default:
         break;
     }

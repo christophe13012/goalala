@@ -15,8 +15,6 @@ export function getCompetition() {
   );
 }
 
-const { data } = await getCompetition();
-
 export function getRecents() {
   return axios.get(
     "https://livescore-api.com/api-client/scores/history.json?key=g76o4OSIJMbcxvgB&secret=z1SM6JIsm48GZvRgDXFILxqvkBHR6YtG&from=" +

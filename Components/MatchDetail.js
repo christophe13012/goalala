@@ -41,7 +41,7 @@ export default class MatchDetail extends React.Component {
           />
         );
       case "OWN_GOAL":
-        return <Text>OG</Text>;
+        return <Text style={{ color: "orange" }}>OG</Text>;
       default:
         break;
     }

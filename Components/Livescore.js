@@ -37,10 +37,11 @@ class Livescore extends React.Component {
     try {
       const { data } = await (this.props.recents ? getRecents() : getMatches());
       this.props.saveMatchesAPI(data.data.match);
+      const next_page = !data.data.next_page ? false : true;
       this.setState({
         matches: data.data.match,
         apiEnd: true,
-        next_page: data.data.next_page
+        next_page
       });
       //this.interval();
     } catch (error) {
@@ -49,9 +50,11 @@ class Livescore extends React.Component {
   }
   addcontent = async () => {
     if (this.props.recents && this.state.next_page) {
+      console.log("nouvelle page");
+      const next_page = !data.data.next_page ? false : true;
       const { data } = await getRecentsByPage(this.state.page);
       const matches = [...this.state.matches, ...data.data.match];
-      this.setState({ matches, page: page++, next_page: data.data.next_page });
+      this.setState({ matches, page: page++, next_page });
     }
   };
   interval = () => {

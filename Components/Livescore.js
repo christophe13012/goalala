@@ -9,10 +9,9 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import _ from "lodash";
-import { getMatches, getCompetition, getRecents } from "../API/index";
+import { getMatches, getRecents, getRecentsByPage } from "../API/index";
 import Competition from "./Competition";
 import { saveMatchesAPI } from "../Store/Actions/index";
-import { BottomTabBar } from "react-navigation";
 
 const mapStateToProps = state => {
   return {
@@ -28,22 +27,31 @@ const mapDispatchToProps = dispatch => {
 };
 
 class Livescore extends React.Component {
-  state = { matches: this.props.matchesAPI, apiEnd: false };
+  state = {
+    matches: this.props.matchesAPI,
+    apiEnd: false,
+    pageHistory: 2,
+    next_page: false
+  };
   async componentDidMount() {
     try {
       const { data } = await (this.props.recents ? getRecents() : getMatches());
       this.props.saveMatchesAPI(data.data.match);
-      this.setState({ matches: data.data.match, apiEnd: true });
+      this.setState({
+        matches: data.data.match,
+        apiEnd: true,
+        next_page: data.data.next_page
+      });
       //this.interval();
     } catch (error) {
       console.log("error :" + error);
     }
   }
   addcontent = async () => {
-    if (this.props.recents) {
-      const { data } = await getMatches();
+    if (this.props.recents && this.state.next_page) {
+      const { data } = await getRecentsByPage(this.state.page);
       const matches = [...this.state.matches, ...data.data.match];
-      this.setState({ matches });
+      this.setState({ matches, page: page++, next_page: data.data.next_page });
     }
   };
   interval = () => {

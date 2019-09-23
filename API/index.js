@@ -22,6 +22,15 @@ export function getRecents() {
   );
 }
 
+export function getRecentsByPage(page) {
+  return axios.get(
+    "https://livescore-api.com/api-client/scores/history.json?key=g76o4OSIJMbcxvgB&secret=z1SM6JIsm48GZvRgDXFILxqvkBHR6YtG&from=" +
+      aujISO +
+      "&page=" +
+      page
+  );
+}
+
 export function getDetailMatch(idMatch) {
   return axios.get(
     "http://livescore-api.com/api-client/scores/events.json?key=g76o4OSIJMbcxvgB&secret=z1SM6JIsm48GZvRgDXFILxqvkBHR6YtG&id=" +
@@ -353,7 +362,7 @@ export const competitionliste = [
   {
     idcompet: "244",
     pays: null,
-    urlFlag: require("../Images/flags/null.png")
+    urlFlag: require("../Images/flags/europe.png")
   },
   {
     idcompet: "317",
@@ -783,7 +792,7 @@ export const competitionliste = [
   {
     idcompet: "245",
     pays: null,
-    urlFlag: require("../Images/flags/null.png")
+    urlFlag: require("../Images/flags/europe.png")
   },
   {
     idcompet: "152",

@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
 import { setmatchIdFavori } from "../Store/Actions/index";
+import moment from "moment";
+import "moment/locale/eo"; // without this line it didn't work
+moment.locale("eo");
 
 const mapStateToProps = state => {
   return { matchIdFavori: state.matchIdFavori };
@@ -26,6 +29,21 @@ class Match extends Component {
       ? require("../Images/like.png")
       : require("../Images/unlike.png");
   }
+  getHour = time => {
+    if (isNaN(time)) {
+      if (time.length === 5) {
+        const heureMatchUTC = moment.utc(new Date()).format("L") + "T" + time;
+        return moment
+          .utc(heureMatchUTC)
+          .local()
+          .format("LT");
+      } else {
+        return time;
+      }
+    } else {
+      return time + "'";
+    }
+  };
   render() {
     const { match } = this.props;
     return (
@@ -37,9 +55,7 @@ class Match extends Component {
         }
       >
         <View style={styles.time}>
-          <Text style={styles.text}>
-            {isNaN(match.time) ? match.time : match.time + "'"}
-          </Text>
+          <Text style={styles.text}>{this.getHour(match.time)}</Text>
         </View>
         <TouchableOpacity
           style={styles.match}

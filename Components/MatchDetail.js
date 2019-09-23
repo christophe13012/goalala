@@ -8,7 +8,6 @@ export default class MatchDetail extends React.Component {
     const { data } = await getDetailMatch(
       this.props.navigation.state.params.match.id
     );
-    console.log("fini");
     this.setState({ event: data.data.event });
   }
   renderImage(event) {

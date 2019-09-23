@@ -28,6 +28,11 @@ class Splash extends Component {
             <Spinningball />
           </Animatable.Text>
         </View>
+        <View>
+          <Text style={styles.author}>
+            Icon made by freepik and turkkub from www.flaticon.com
+          </Text>
+        </View>
       </View>
     );
   }
@@ -54,6 +59,11 @@ const styles = StyleSheet.create({
   },
   activity: {
     flex: 2
+  },
+  author: {
+    color: "white",
+    marginBottom: 10,
+    fontSize: 12
   },
   sousTitre: {
     color: "white",

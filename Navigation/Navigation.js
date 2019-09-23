@@ -27,7 +27,7 @@ const TabNav = createMaterialTopTabNavigator(
     Tab1: {
       screen: Recents,
       navigationOptions: {
-        title: "Récents",
+        title: "Aujourd'hui",
         tabBarOptions: {
           upperCaseLabel: false,
           style: {
@@ -39,7 +39,7 @@ const TabNav = createMaterialTopTabNavigator(
     Tab2: {
       screen: Home,
       navigationOptions: {
-        title: "Aujourd'hui",
+        title: "Récents",
         tabBarOptions: {
           upperCaseLabel: false,
           style: {

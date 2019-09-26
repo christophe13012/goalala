@@ -6,7 +6,6 @@ export default class Spinningball extends Component {
     super(props);
     this.state = { spinAnim: new Animated.Value(0) };
   }
-
   componentDidMount() {
     Animated.loop(
       Animated.timing(this.state.spinAnim, {
@@ -17,7 +16,6 @@ export default class Spinningball extends Component {
       })
     ).start();
   }
-
   render() {
     const spin = this.state.spinAnim.interpolate({
       inputRange: [0, 1],

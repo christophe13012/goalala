@@ -1,12 +1,5 @@
 import React, { Component } from "react";
-import {
-  Text,
-  View,
-  StyleSheet,
-  Image,
-  Button,
-  TouchableOpacity
-} from "react-native";
+import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
 import { competitionliste } from "../API";
 import { ScrollView } from "react-native-gesture-handler";

@@ -16,8 +16,10 @@ const mapDispatchToProps = dispatch => {
 
 class Match extends Component {
   state = {};
-  displayDetailMatch = match => {
-    this.props.navigation.navigate("MatchDetail", { match: match });
+  displayDetailMatch = (match, competition_id) => {
+    this.props.navigation.navigate("MatchDetail", {
+      match: match
+    });
   };
   fav = matchId => {
     this.props.setmatchIdFavori(matchId);
@@ -99,12 +101,12 @@ const styles = StyleSheet.create({
     paddingRight: 3
   },
   time: {
-    width: "10%",
+    width: "15%",
     alignItems: "center",
     justifyContent: "center"
   },
   match: {
-    width: "75%",
+    width: "70%",
     alignItems: "flex-start",
     justifyContent: "center",
     paddingLeft: 15

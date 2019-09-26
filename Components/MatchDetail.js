@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Text, View, StyleSheet, Image, Span } from "react-native";
 import { getDetailMatch } from "../API/index";
+import { competitionliste } from "../API/index";
 
 export default class MatchDetail extends React.Component {
   state = { event: [] };
@@ -46,12 +47,26 @@ export default class MatchDetail extends React.Component {
         break;
     }
   }
+  renderPays(id) {
+    const competIndex = competitionliste.findIndex(
+      compet => compet.idcompet == id
+    );
+    const urlFlag = competitionliste[competIndex].urlFlag;
+    return <Image source={urlFlag} style={styles.icon} />;
+  }
+
   render() {
     const { match } = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
         <View style={styles.competition}>
-          <Text style={styles.competition_name}>{match.competition_name}</Text>
+          <View style={styles.vide}></View>
+          <View style={styles.competition_name}>
+            <Text>{match.competition_name}</Text>
+          </View>
+          <View style={styles.pays}>
+            {this.renderPays(match.competition_id)}
+          </View>
         </View>
         <View style={styles.match}>
           <Text style={styles.time}>{match.time}</Text>
@@ -117,7 +132,11 @@ const styles = StyleSheet.create({
     height: 30
   },
   time: { width: "10%", textAlign: "center", color: "white" },
-  competition_name: { width: "85%", textAlign: "center" },
+  competition_name: {
+    width: "80%",
+    alignItems: "center"
+  },
+  vide: { width: "10%" },
   match: {
     flexDirection: "row",
     backgroundColor: "#311b92",
@@ -174,5 +193,13 @@ const styles = StyleSheet.create({
   },
   player: {
     width: "40%"
+  },
+  pays: {
+    width: "10%"
+  },
+  icon: {
+    width: 20,
+    height: 20,
+    marginRight: 10
   }
 });

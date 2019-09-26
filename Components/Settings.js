@@ -1,12 +1,5 @@
 import * as React from "react";
-import {
-  Text,
-  View,
-  StyleSheet,
-  Image,
-  Button,
-  TouchableOpacity
-} from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
 import { setInterval } from "../Store/Actions/index";
 import SelectionCompetition from "./SelectionCompetition";

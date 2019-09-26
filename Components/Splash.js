@@ -10,7 +10,6 @@ class Splash extends Component {
       this.props.navigation.navigate("App");
     }, 4000);
   }
-
   render() {
     return (
       <View style={styles.container}>

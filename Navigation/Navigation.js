@@ -27,7 +27,7 @@ const TabNav = createMaterialTopTabNavigator(
     Tab1: {
       screen: Recents,
       navigationOptions: {
-        title: "Aujourd'hui",
+        title: "Terminés",
         tabBarOptions: {
           upperCaseLabel: false,
           style: {
@@ -73,7 +73,8 @@ const HomeStackNavigator = createStackNavigator({
       headerStyle: {
         backgroundColor: "#311b92"
       },
-      headerTitle: <CustomHeader title="Goalala" subtitle="livescore" />
+      headerTitle: <CustomHeader title="Goalala" subtitle="livescore" />,
+      headerBackTitle: "Retour"
     }
   },
   MatchDetail: {

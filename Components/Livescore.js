@@ -43,18 +43,18 @@ class Livescore extends React.Component {
         apiEnd: true,
         next_page
       });
-      //this.interval();
+      if (!this.props.recents) this.interval();
     } catch (error) {
       console.log("error :" + error);
     }
   }
   addcontent = async () => {
     if (this.props.recents && this.state.next_page) {
-      console.log("nouvelle page");
+      let pageHistory = this.state.pageHistory + 1;
+      const { data } = await getRecentsByPage(this.state.pageHistory);
       const next_page = !data.data.next_page ? false : true;
-      const { data } = await getRecentsByPage(this.state.page);
       const matches = [...this.state.matches, ...data.data.match];
-      this.setState({ matches, page: page++, next_page });
+      this.setState({ matches, pageHistory, next_page });
     }
   };
   interval = () => {
@@ -68,6 +68,8 @@ class Livescore extends React.Component {
     }, this.props.interval * 1000);
   };
   render() {
+    if (!this.props.recents) console.log(this.state.matches);
+
     let filtered = this.props.favorites
       ? this.state.matches.filter(match => {
           return (
@@ -78,7 +80,6 @@ class Livescore extends React.Component {
       : this.state.matches.filter(match => {
           return this.props.competitions.includes(match.competition_id);
         });
-
     if (this.props.live) {
       filtered = filtered.filter(match => match.status === "IN PLAY");
     }
@@ -86,6 +87,7 @@ class Livescore extends React.Component {
     const matches = _.groupBy(filtered, match => match.competition_id);
 
     const matchListOrdered = _.orderBy(matches, ["competition_name"], "asc");
+
     return !this.state.apiEnd ? (
       <View style={styles.activity}>
         <Text style={styles.textChargement}>

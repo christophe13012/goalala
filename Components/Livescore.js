@@ -31,7 +31,8 @@ class Livescore extends React.Component {
     matches: this.props.matchesAPI,
     apiEnd: false,
     pageHistory: 2,
-    next_page: false
+    next_page: false,
+    error: null
   };
   async componentDidMount() {
     try {
@@ -41,11 +42,16 @@ class Livescore extends React.Component {
       this.setState({
         matches: data.data.match,
         apiEnd: true,
-        next_page
+        next_page,
+        error: null
       });
       if (!this.props.recents) this.interval();
     } catch (error) {
-      console.log("error :" + error);
+      console.log("error :" + error.message);
+      this.setState({
+        apiEnd: true,
+        error: <Text>Une erreur est survenue : {error.message}</Text>
+      });
     }
   }
   addcontent = async () => {
@@ -68,8 +74,7 @@ class Livescore extends React.Component {
     }, this.props.interval * 1000);
   };
   render() {
-    if (!this.props.recents) console.log(this.state.matches);
-
+    if (this.props.recents) console.log(this.state.matches);
     let filtered = this.props.favorites
       ? this.state.matches.filter(match => {
           return (
@@ -78,12 +83,14 @@ class Livescore extends React.Component {
           );
         })
       : this.state.matches.filter(match => {
-          return this.props.competitions.includes(match.competition_id);
+          return (
+            this.props.competitions.includes(match.competition_id) ||
+            this.props.competitions.includes(match.competition_id * 1)
+          );
         });
     if (this.props.live) {
       filtered = filtered.filter(match => match.status === "IN PLAY");
     }
-
     const matches = _.groupBy(filtered, match => match.competition_id);
 
     const matchListOrdered = _.orderBy(matches, ["competition_name"], "asc");
@@ -98,6 +105,7 @@ class Livescore extends React.Component {
     ) : (
       <View style={styles.container}>
         <StatusBar barStyle="light-content" />
+        {this.state.error}
         <ScrollView
           style={styles.matchList}
           onScroll={e => {

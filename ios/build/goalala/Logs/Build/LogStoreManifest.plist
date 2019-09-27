@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>logFormatVersion</key>
+	<integer>10</integer>
+	<key>logs</key>
+	<dict>
+		<key>66C4F286-E9BC-4091-900C-68024512B31E</key>
+		<dict>
+			<key>className</key>
+			<string>IDECommandLineBuildLog</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>66C4F286-E9BC-4091-900C-68024512B31E.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>goalala project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>goalala</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Building workspace goalala with scheme goalala and configuration Debug</string>
+			<key>timeStartedRecording</key>
+			<real>591229268.76860499</real>
+			<key>timeStoppedRecording</key>
+			<real>591229269.47360301</real>
+			<key>title</key>
+			<string>Building workspace goalala with scheme goalala and configuration Debug</string>
+			<key>uniqueIdentifier</key>
+			<string>66C4F286-E9BC-4091-900C-68024512B31E</string>
+		</dict>
+		<key>D86ACC66-7A50-472D-8769-F5FE625A8EA9</key>
+		<dict>
+			<key>className</key>
+			<string>IDECommandLineBuildLog</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>D86ACC66-7A50-472D-8769-F5FE625A8EA9.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>goalala project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>goalala</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Building workspace goalala with scheme goalala and configuration Debug</string>
+			<key>timeStartedRecording</key>
+			<real>591229769.32939696</real>
+			<key>timeStoppedRecording</key>
+			<real>591229774.76842296</real>
+			<key>title</key>
+			<string>Building workspace goalala with scheme goalala and configuration Debug</string>
+			<key>uniqueIdentifier</key>
+			<string>D86ACC66-7A50-472D-8769-F5FE625A8EA9</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

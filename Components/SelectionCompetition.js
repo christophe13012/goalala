@@ -31,7 +31,7 @@ class selectionCompetition extends Component {
       <Image
         style={styles.icon}
         source={
-          this.props.competitions.includes(idcompet)
+          this.props.competitions.includes(idcompet * 1)
             ? require("../Images/minus.png")
             : require("../Images/plus.png")
         }
@@ -49,7 +49,7 @@ class selectionCompetition extends Component {
           {pays.map(
             (compet, index) =>
               index === 0 ||
-              (pays[index - 1].pays != compet.pays && (
+              (pays[index - 1].pays != compet.pays && compet.pays && (
                 <View key={index} style={styles.paysContainer}>
                   <Text style={styles.pays}>{_.startCase(compet.pays)}</Text>
                   <TouchableOpacity

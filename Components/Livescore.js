@@ -74,7 +74,6 @@ class Livescore extends React.Component {
     }, this.props.interval * 1000);
   };
   render() {
-    if (this.props.recents) console.log(this.state.matches);
     let filtered = this.props.favorites
       ? this.state.matches.filter(match => {
           return (

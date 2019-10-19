@@ -23,9 +23,7 @@ class Splash extends Component {
           <Text style={styles.sousTitre}></Text>
         </View>
         <View style={styles.activity}>
-          <Animatable.Text style={styles.sousTitre} animation="bounce">
-            <Spinningball />
-          </Animatable.Text>
+          <Spinningball />
         </View>
         <View>
           <Text style={styles.author}>

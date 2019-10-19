@@ -6,7 +6,7 @@
 	<integer>10</integer>
 	<key>logs</key>
 	<dict>
-		<key>D4F1EC2E-3134-41B4-98CE-9925FD131E8E</key>
+		<key>49C816E5-6C9C-426F-BA44-465F3E4B9942</key>
 		<dict>
 			<key>className</key>
 			<string>IDECommandLineBuildLog</string>
@@ -15,13 +15,13 @@
 			<key>domainType</key>
 			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
 			<key>fileName</key>
-			<string>D4F1EC2E-3134-41B4-98CE-9925FD131E8E.xcactivitylog</string>
+			<string>49C816E5-6C9C-426F-BA44-465F3E4B9942.xcactivitylog</string>
 			<key>hasPrimaryLog</key>
 			<true/>
 			<key>primaryObservable</key>
 			<dict>
 				<key>highLevelStatus</key>
-				<string>W</string>
+				<string>E</string>
 			</dict>
 			<key>schemeIdentifier-containerName</key>
 			<string>goalala project</string>
@@ -32,15 +32,15 @@
 			<key>signature</key>
 			<string>Building workspace goalala with scheme goalala and configuration Debug</string>
 			<key>timeStartedRecording</key>
-			<real>591565863.295596</real>
+			<real>593177139.37820196</real>
 			<key>timeStoppedRecording</key>
-			<real>591565864.96367097</real>
+			<real>593177141.72368205</real>
 			<key>title</key>
 			<string>Building workspace goalala with scheme goalala and configuration Debug</string>
 			<key>uniqueIdentifier</key>
-			<string>D4F1EC2E-3134-41B4-98CE-9925FD131E8E</string>
+			<string>49C816E5-6C9C-426F-BA44-465F3E4B9942</string>
 		</dict>
-		<key>F203F571-287E-4593-99F8-D05406BE7586</key>
+		<key>4A0E612A-0458-40AD-8B95-241ABBE65866</key>
 		<dict>
 			<key>className</key>
 			<string>IDECommandLineBuildLog</string>
@@ -49,13 +49,13 @@
 			<key>domainType</key>
 			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
 			<key>fileName</key>
-			<string>F203F571-287E-4593-99F8-D05406BE7586.xcactivitylog</string>
+			<string>4A0E612A-0458-40AD-8B95-241ABBE65866.xcactivitylog</string>
 			<key>hasPrimaryLog</key>
 			<true/>
 			<key>primaryObservable</key>
 			<dict>
 				<key>highLevelStatus</key>
-				<string>W</string>
+				<string>E</string>
 			</dict>
 			<key>schemeIdentifier-containerName</key>
 			<string>goalala project</string>
@@ -66,13 +66,13 @@
 			<key>signature</key>
 			<string>Building workspace goalala with scheme goalala and configuration Debug</string>
 			<key>timeStartedRecording</key>
-			<real>591566891.24868095</real>
+			<real>593114575.49621403</real>
 			<key>timeStoppedRecording</key>
-			<real>591566892.05994201</real>
+			<real>593114576.91069901</real>
 			<key>title</key>
 			<string>Building workspace goalala with scheme goalala and configuration Debug</string>
 			<key>uniqueIdentifier</key>
-			<string>F203F571-287E-4593-99F8-D05406BE7586</string>
+			<string>4A0E612A-0458-40AD-8B95-241ABBE65866</string>
 		</dict>
 	</dict>
 </dict>

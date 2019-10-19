@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Animated, Easing } from "react-native";
+import { Animated, Easing, Image } from "react-native";
 
 export default class Spinningball extends Component {
   constructor(props) {
@@ -22,14 +22,16 @@ export default class Spinningball extends Component {
       outputRange: ["0deg", "360deg"]
     });
     return (
-      <Animated.Image
-        style={{
-          height: 100,
-          width: 100,
-          transform: [{ rotate: spin }]
-        }}
-        source={require("../Images/football.png")}
-      />
+      <React.Fragment>
+        <Animated.Image
+          style={{
+            height: 100,
+            width: 100,
+            transform: [{ rotate: spin }]
+          }}
+          source={require("../Images/football.png")}
+        />
+      </React.Fragment>
     );
   }
 }

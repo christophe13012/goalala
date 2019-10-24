@@ -12,6 +12,8 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		B26B15C5CF1FDD306730D17B /* libPods-goalala.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 963B884F156A36F608D46197 /* libPods-goalala.a */; };
+		B6032DBA235B785A00ADD925 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 008F07F21AC5B25A0029DE68 /* main.jsbundle */; };
+		B6032DBE235B7AB100ADD925 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = B6032DBD235B7AB100ADD925 /* assets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +29,8 @@
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		790B6A2DCCE027C84B683F53 /* Pods-goalala.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-goalala.release.xcconfig"; path = "Target Support Files/Pods-goalala/Pods-goalala.release.xcconfig"; sourceTree = "<group>"; };
 		963B884F156A36F608D46197 /* libPods-goalala.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-goalala.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6032DBB235B791200ADD925 /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Images; path = assets/Images; sourceTree = "<group>"; };
+		B6032DBD235B7AB100ADD925 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
@@ -87,6 +91,8 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				B6032DBD235B7AB100ADD925 /* assets */,
+				B6032DBB235B791200ADD925 /* Images */,
 				13B07FAE1A68108700A75B9A /* goalala */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				83CBBA001A601CBA00E9B192 /* Products */,
@@ -167,6 +173,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6032DBE235B7AB100ADD925 /* assets in Resources */,
+				B6032DBA235B785A00ADD925 /* main.jsbundle in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);

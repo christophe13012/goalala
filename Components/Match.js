@@ -47,7 +47,7 @@ class Match extends Component {
     }
   };
   render() {
-    const { match } = this.props;
+    const { match, date } = this.props;
     return (
       <View
         style={
@@ -57,7 +57,9 @@ class Match extends Component {
         }
       >
         <View style={styles.time}>
-          <Text style={styles.text}>{this.getHour(match.time)}</Text>
+          <Text style={this.props.recents ? styles.date : styles.text}>
+            {this.props.recents ? date : this.getHour(match.time)}
+          </Text>
         </View>
         <TouchableOpacity
           style={styles.match}
@@ -124,7 +126,12 @@ const styles = StyleSheet.create({
     borderTopColor: "#311b92"
   },
   image: { height: 20, width: 20 },
-  text: { color: "white" }
+  text: { color: "white" },
+  date: {
+    color: "white",
+    paddingLeft: 5,
+    fontSize: 13
+  }
 });
 
 export default connect(

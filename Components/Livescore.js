@@ -28,24 +28,29 @@ const mapDispatchToProps = dispatch => {
 
 class Livescore extends React.Component {
   state = {
-    matches: this.props.matchesAPI,
+    matches: [],
     apiEnd: false,
-    pageHistory: 2,
-    next_page: false,
     error: null
   };
-  async componentDidMount() {
+  componentDidMount() {
+    this.populateScores();
+    this.interval();
+  }
+  populateScores = async () => {
     try {
-      const { data } = await (this.props.recents ? getRecents() : getMatches());
-      this.props.saveMatchesAPI(data.data.match);
-      const next_page = !data.data.next_page ? false : true;
+      let matches = [];
+      if (this.props.recents) {
+        matches = await this.getAllRecents();
+      } else {
+        const { data } = await getMatches();
+        matches = data.data.match;
+      }
+      // this.props.saveMatchesAPI(data.data.match);
       this.setState({
-        matches: data.data.match,
+        matches,
         apiEnd: true,
-        next_page,
         error: null
       });
-      if (!this.props.recents) this.interval();
     } catch (error) {
       console.log("error :" + error.message);
       this.setState({
@@ -53,24 +58,34 @@ class Livescore extends React.Component {
         error: <Text>Une erreur est survenue : {error.message}</Text>
       });
     }
-  }
-  addcontent = async () => {
-    if (this.props.recents && this.state.next_page) {
-      let pageHistory = this.state.pageHistory + 1;
-      const { data } = await getRecentsByPage(this.state.pageHistory);
-      const next_page = !data.data.next_page ? false : true;
-      const matches = [...this.state.matches, ...data.data.match];
-      this.setState({ matches, pageHistory, next_page });
+  };
+  getAllRecents = async () => {
+    let otherPage = true;
+    let page = 1;
+    let matches = [];
+    const auj = new Date();
+    auj.setDate(auj.getDate() - 1);
+    const hierISO = auj.toISOString().substring(0, 10);
+    while (otherPage) {
+      try {
+        const { data } = await getRecentsByPage(page, hierISO);
+        otherPage = !data.data.next_page ? false : true;
+        matches = [...matches, ...data.data.match];
+        page++;
+      } catch (error) {
+        console.log("error :" + error.message);
+        this.setState({
+          apiEnd: true,
+          error: <Text>Une erreur est survenue : {error.message}</Text>
+        });
+      }
     }
+    return matches;
   };
   interval = () => {
-    setInterval(async () => {
-      try {
-        const { data } = await getMatches();
-        this.setState({ matches: data.data.match });
-      } catch (error) {
-        console.log("error :" + error);
-      }
+    setInterval(() => {
+      this.populateScores();
+      console.log("test pop");
     }, this.props.interval * 1000);
   };
   render() {
@@ -88,7 +103,9 @@ class Livescore extends React.Component {
           );
         });
     if (this.props.live) {
-      filtered = filtered.filter(match => match.status === "IN PLAY");
+      filtered = filtered.filter(
+        match => match.status === "IN PLAY" || match.status === "ADDED TIME"
+      );
     }
     const matches = _.groupBy(filtered, match => match.competition_id);
 
@@ -103,21 +120,12 @@ class Livescore extends React.Component {
       </View>
     ) : (
       <View style={styles.container}>
+        {!this.props.favorites && matchListOrdered.length === 0 && (
+          <Text style={styles.noMatch}>Désolé, aucun match en cours.</Text>
+        )}
         <StatusBar barStyle="light-content" />
         {this.state.error}
-        <ScrollView
-          style={styles.matchList}
-          onScroll={e => {
-            let paddingToBottom = 10;
-            paddingToBottom += e.nativeEvent.layoutMeasurement.height;
-            if (
-              e.nativeEvent.contentOffset.y >=
-              e.nativeEvent.contentSize.height - paddingToBottom
-            ) {
-              this.addcontent();
-            }
-          }}
-        >
+        <ScrollView style={styles.matchList}>
           {matchListOrdered.map((el, index) => (
             <Competition
               key={index}
@@ -153,6 +161,9 @@ const styles = StyleSheet.create({
   },
   textChargement: {
     marginBottom: 15
+  },
+  noMatch: {
+    marginTop: 30
   }
 });
 

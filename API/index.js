@@ -1,7 +1,8 @@
 import axios from "axios";
 
-const auj = new Date();
-const aujISO = auj.toISOString().substring(0, 10);
+// const auj = new Date();
+// auj.setDate(auj.getDate() - 1);
+// const aujISO = auj.toISOString().substring(0, 10);
 
 export function getMatches() {
   return axios.get(
@@ -22,10 +23,10 @@ export function getRecents() {
   );
 }
 
-export function getRecentsByPage(page) {
+export function getRecentsByPage(page, date) {
   return axios.get(
     "https://livescore-api.com/api-client/scores/history.json?key=g76o4OSIJMbcxvgB&secret=z1SM6JIsm48GZvRgDXFILxqvkBHR6YtG&from=" +
-      aujISO +
+      date +
       "&page=" +
       page
   );

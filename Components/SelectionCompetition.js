@@ -21,7 +21,7 @@ class selectionCompetition extends Component {
   handleSelectCompet = pays => {
     const competitions = [];
     competitionliste.forEach(compet => {
-      if (compet.pays === pays) competitions.push(compet.idcompet);
+      if (compet.pays === pays) competitions.push(compet.idcompet * 1);
     });
     this.props.toggleCompetitions(competitions);
   };

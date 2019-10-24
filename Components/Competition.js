@@ -20,9 +20,18 @@ class Competition extends Component {
     return (
       <View style={styles.main}>
         <View style={styles.titre}>
-          <Text style={styles.date}>
-            {this.formatDate(this.props.competition[0].added)}
-          </Text>
+          {this.props.recents ? (
+            <View style={styles.imageContainer}>
+              <Image
+                source={require("../Images/whistle.png")}
+                style={styles.image}
+              />
+            </View>
+          ) : (
+            <Text style={styles.date}>
+              {this.formatDate(this.props.competition[0].added)}
+            </Text>
+          )}
           <Text style={styles.titreText}>
             {this.props.competition[0].competition_name}
           </Text>
@@ -34,6 +43,7 @@ class Competition extends Component {
           <Match
             key={index}
             match={match}
+            date={this.formatDate(match.added)}
             index={index}
             length={this.props.competition.length}
             navigation={this.props.navigation}
@@ -72,6 +82,14 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
     marginRight: 10
+  },
+  image: {
+    width: 20,
+    height: 20,
+    marginLeft: 10
+  },
+  imageContainer: {
+    flex: 1
   }
 });
 

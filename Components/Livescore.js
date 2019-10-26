@@ -5,7 +5,9 @@ import {
   StatusBar,
   ScrollView,
   ActivityIndicator,
-  Text
+  Text,
+  Image,
+  UIExplorerBlock
 } from "react-native";
 import { connect } from "react-redux";
 import _ from "lodash";
@@ -120,9 +122,26 @@ class Livescore extends React.Component {
       </View>
     ) : (
       <View style={styles.container}>
-        {!this.props.favorites && matchListOrdered.length === 0 && (
-          <Text style={styles.noMatch}>Désolé, aucun match en cours.</Text>
-        )}
+        {matchListOrdered.length === 0 &&
+          (!this.props.favorites ? (
+            <Text style={styles.noMatch}>Désolé, aucun match en cours.</Text>
+          ) : (
+            <View
+              style={{
+                flexDirection: "row",
+                flexWrap: "wrap",
+                marginTop: 15,
+                paddingLeft: 15
+              }}
+            >
+              <Text>Aucun match favori, pour en ajouter, cliquez sur le </Text>
+              <Image
+                style={styles.image}
+                source={require("../Images/like.png")}
+              />
+              <Text>dans la liste de matches.</Text>
+            </View>
+          ))}
         <StatusBar barStyle="light-content" />
         {this.state.error}
         <ScrollView style={styles.matchList}>
@@ -164,6 +183,10 @@ const styles = StyleSheet.create({
   },
   noMatch: {
     marginTop: 30
+  },
+  image: {
+    width: 20,
+    height: 20
   }
 });
 

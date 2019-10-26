@@ -4,12 +4,12 @@ import { getDetailMatch } from "../API/index";
 import { competitionliste } from "../API/index";
 
 export default class MatchDetail extends React.Component {
-  state = { event: [] };
+  state = { event: [], apiEnd: false };
   async componentDidMount() {
     const { data } = await getDetailMatch(
       this.props.navigation.state.params.match.id
     );
-    this.setState({ event: data.data.event });
+    this.setState({ event: data.data.event, apiEnd: true });
   }
   renderImage(event) {
     switch (event) {
@@ -74,10 +74,12 @@ export default class MatchDetail extends React.Component {
           <Text style={styles.score}>{match.score}</Text>
           <Text style={styles.away_name}>{match.away_name}</Text>
         </View>
-        {this.state.event.length === 0 ? (
+        {this.state.event.length === 0 && !this.state.apiEnd ? (
           <View style={styles.activity}>
             <ActivityIndicator size="small" color="#311b92" />
           </View>
+        ) : this.state.event.length === 0 && this.state.apiEnd ? (
+          <Text style={styles.noMatch}>Aucun evenement dans ce match.</Text>
         ) : (
           this.state.event.map(event => {
             return event.home_away === "h" ? (
@@ -216,5 +218,8 @@ const styles = StyleSheet.create({
   },
   textChargement: {
     marginBottom: 15
+  },
+  noMatch: {
+    marginTop: 10
   }
 });

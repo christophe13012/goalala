@@ -17,6 +17,8 @@ class Settings extends React.Component {
     this.props.setInterval(sec);
   };
   render() {
+    console.log(this.props.interval);
+
     return (
       <View style={styles.container}>
         <Text style={styles.titre}>Intervalle de mise à jour des scores :</Text>

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Text, View, StyleSheet, Image, Span } from "react-native";
+import { Text, View, StyleSheet, Image, ActivityIndicator } from "react-native";
 import { getDetailMatch } from "../API/index";
 import { competitionliste } from "../API/index";
 
@@ -74,39 +74,45 @@ export default class MatchDetail extends React.Component {
           <Text style={styles.score}>{match.score}</Text>
           <Text style={styles.away_name}>{match.away_name}</Text>
         </View>
-        {this.state.event.map(event => {
-          return event.home_away === "h" ? (
-            <View style={styles.eventView} key={event.id}>
-              <View style={styles.minutes}>
-                <Text style={styles.textMinutes}>
-                  {isNaN(event.time) ? event.time + "'" : event.time}
-                </Text>
+        {this.state.event.length === 0 ? (
+          <View style={styles.activity}>
+            <ActivityIndicator size="small" color="#311b92" />
+          </View>
+        ) : (
+          this.state.event.map(event => {
+            return event.home_away === "h" ? (
+              <View style={styles.eventView} key={event.id}>
+                <View style={styles.minutes}>
+                  <Text style={styles.textMinutes}>
+                    {isNaN(event.time) ? event.time + "'" : event.time}
+                  </Text>
+                </View>
+                <View style={styles.imageAction}>
+                  {this.renderImage(event.event)}
+                </View>
+                <View style={styles.player}>
+                  <Text style={styles.text}>{event.player}</Text>
+                </View>
+                <View style={styles.null}></View>
               </View>
-              <View style={styles.imageAction}>
-                {this.renderImage(event.event)}
+            ) : (
+              <View style={styles.eventView} key={event.id}>
+                <View style={styles.minutes}>
+                  <Text style={styles.textMinutes}>
+                    {isNaN(event.time) ? event.time + "'" : event.time}
+                  </Text>
+                </View>
+                <View style={styles.null}></View>
+                <View style={styles.imageAction}>
+                  {this.renderImage(event.event)}
+                </View>
+                <View style={styles.player}>
+                  <Text style={styles.text}>{event.player}</Text>
+                </View>
               </View>
-              <View style={styles.player}>
-                <Text style={styles.text}>{event.player}</Text>
-              </View>
-              <View style={styles.null}></View>
-            </View>
-          ) : (
-            <View style={styles.eventView} key={event.id}>
-              <View style={styles.minutes}>
-                <Text style={styles.textMinutes}>
-                  {isNaN(event.time) ? event.time + "'" : event.time}
-                </Text>
-              </View>
-              <View style={styles.null}></View>
-              <View style={styles.imageAction}>
-                {this.renderImage(event.event)}
-              </View>
-              <View style={styles.player}>
-                <Text style={styles.text}>{event.player}</Text>
-              </View>
-            </View>
-          );
-        })}
+            );
+          })
+        )}
       </View>
     );
   }
@@ -201,5 +207,14 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
     marginRight: 10
+  },
+  activity: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 20
+  },
+  textChargement: {
+    marginBottom: 15
   }
 });

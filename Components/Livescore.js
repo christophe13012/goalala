@@ -87,7 +87,6 @@ class Livescore extends React.Component {
   interval = () => {
     setInterval(() => {
       this.populateScores();
-      console.log("test pop");
     }, this.props.interval * 1000);
   };
   render() {
@@ -106,7 +105,10 @@ class Livescore extends React.Component {
         });
     if (this.props.live) {
       filtered = filtered.filter(
-        match => match.status === "IN PLAY" || match.status === "ADDED TIME"
+        match =>
+          match.status === "IN PLAY" ||
+          match.status === "ADDED TIME" ||
+          match.status === "HALF TIME BREAK"
       );
     }
     const matches = _.groupBy(filtered, match => match.competition_id);

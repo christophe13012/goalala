@@ -58,7 +58,7 @@ class Match extends Component {
       >
         <View style={styles.time}>
           <Text style={this.props.recents ? styles.date : styles.text}>
-            {this.props.recents ? date : this.getHour(match.time)}
+            {this.props.recents ? date.slice(0, 5) : this.getHour(match.time)}
           </Text>
         </View>
         <TouchableOpacity
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
   date: {
     color: "white",
     paddingLeft: 5,
-    fontSize: 13
+    fontSize: 14
   }
 });
 

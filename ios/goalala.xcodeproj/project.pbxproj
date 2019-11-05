@@ -275,6 +275,7 @@
 				DEVELOPMENT_TEAM = PJYQ6R9NUP;
 				INFOPLIST_FILE = goalala/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 2.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -295,6 +296,7 @@
 				DEVELOPMENT_TEAM = PJYQ6R9NUP;
 				INFOPLIST_FILE = goalala/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 2.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

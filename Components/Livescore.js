@@ -188,7 +188,9 @@ const styles = StyleSheet.create({
   },
   image: {
     width: 20,
-    height: 20
+    height: 20,
+    marginLeft: 3,
+    marginRight: 3
   }
 });
 

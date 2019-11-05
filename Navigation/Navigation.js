@@ -105,6 +105,9 @@ const FavoritesStackNavigator = createStackNavigator({
         backgroundColor: "#311b92"
       }
     }
+  },
+  MatchDetail: {
+    screen: MatchDetail
   }
 });
 
